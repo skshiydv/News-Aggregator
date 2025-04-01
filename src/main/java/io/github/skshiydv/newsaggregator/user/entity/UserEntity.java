@@ -1,9 +1,11 @@
 package io.github.skshiydv.newsaggregator.user.entity;
-
-import io.github.skshiydv.newsaggregator.core.enums.Roles;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -22,5 +24,5 @@ public class UserEntity {
     private String password;
     @NonNull
     private String username;
-    private Roles role;
+    private List<String> roles = new ArrayList<>();
 }
