@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("create-user")
     public ResponseEntity<String> addUser(@RequestBody CreateUserDto user) {
         String res = userService.createUser(user);
-        if (res.equals("user created")) return new ResponseEntity<>("User created", HttpStatus.CREATED);
+        if (res.equals("User created")) return new ResponseEntity<>("User created", HttpStatus.CREATED);
         else return new ResponseEntity<>("Error creating user", HttpStatus.CONFLICT);
     }
 }

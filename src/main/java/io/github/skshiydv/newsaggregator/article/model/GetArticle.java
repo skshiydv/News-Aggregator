@@ -15,6 +15,6 @@ public class GetArticle {
     private String title;
     private String content;
     private String author;
-    private Set<GetUserDTO> likes;
-    private List<CommentDto> comments;
+    private Set<String> likes;
+    private List<Comment> comments;
 }
