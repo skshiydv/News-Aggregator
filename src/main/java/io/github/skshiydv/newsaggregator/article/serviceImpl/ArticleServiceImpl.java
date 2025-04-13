@@ -1,5 +1,6 @@
 package io.github.skshiydv.newsaggregator.article.serviceImpl;
 
+import io.github.skshiydv.newsaggregator.Comment.entity.Comment;
 import io.github.skshiydv.newsaggregator.article.entity.ArticleEntity;
 import io.github.skshiydv.newsaggregator.article.mapper.ArticleEntityToGetArticle;
 import io.github.skshiydv.newsaggregator.article.mapper.CreateArticleToArticle;
@@ -63,5 +64,34 @@ public class ArticleServiceImpl implements ArticleService {
             }
         }
         return articles;
+    }
+
+    @Override
+    public ArticleEntity getArticleById(String id) {
+        ArticleEntity articleEntity = articleRepository.findById(id).orElse(null);
+        assert articleEntity != null;
+        return articleEntity;
+    }
+
+    @Override
+    public String saveComment(Comment comment, String id) {
+        try {
+            if (articleRepository.findById(id).isPresent()) {
+                ArticleEntity articleEntity = articleRepository.findById(id).get();
+                if (articleEntity.getComments() == null) {
+                    articleEntity.setComments(new ArrayList<>());
+                }
+
+                articleEntity.getComments().add(comment);
+                articleRepository.save(articleEntity);
+            } else {
+                return "Article Not Found";
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while saving comment: " + e.getMessage(), e);
+        }
+
+        return "Success";
     }
 }

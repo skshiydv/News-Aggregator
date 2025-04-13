@@ -16,6 +16,7 @@ public class ArticleEntityToGetArticle implements Function<ArticleEntity, GetArt
         getArticle.setAuthor(articleEntity.getAuthor().getUsername());
         getArticle.setComments(articleEntity.getComments());
         getArticle.setLikes(articleEntity.getLikes());
+        getArticle.setArticleType(articleEntity.getType());
         return getArticle;
     }
 

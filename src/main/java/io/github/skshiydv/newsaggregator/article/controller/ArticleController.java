@@ -1,5 +1,6 @@
 package io.github.skshiydv.newsaggregator.article.controller;
 
+import io.github.skshiydv.newsaggregator.Comment.entity.Comment;
 import io.github.skshiydv.newsaggregator.article.entity.ArticleEntity;
 import io.github.skshiydv.newsaggregator.article.model.CreateArticle;
 import io.github.skshiydv.newsaggregator.article.model.GetArticle;
@@ -28,5 +29,10 @@ public class ArticleController {
     public ResponseEntity<List<GetArticle>> getArticle(@PathVariable String username) {
         List<GetArticle> articles = articleService.getArticlesByUsername(username);
         return new ResponseEntity<>(articles, HttpStatus.OK);
+    }
+
+    @PostMapping("/add-comment/{articleId}")
+    public ResponseEntity<ArticleEntity> postComment(@RequestBody Comment comment, @PathVariable String articleId) {
+        return null;
     }
 }

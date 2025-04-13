@@ -1,5 +1,6 @@
 package io.github.skshiydv.newsaggregator.article.service;
 
+import io.github.skshiydv.newsaggregator.Comment.entity.Comment;
 import io.github.skshiydv.newsaggregator.article.entity.ArticleEntity;
 import io.github.skshiydv.newsaggregator.article.model.CreateArticle;
 import io.github.skshiydv.newsaggregator.article.model.GetArticle;
@@ -11,4 +12,7 @@ public interface ArticleService {
     GetArticle getArticle(String title);
     List<GetArticle> getArticlesByUsername(String username);
 
+    ArticleEntity getArticleById(String id);
+
+    String saveComment(Comment comment, String id);
 }
