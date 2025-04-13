@@ -1,6 +1,8 @@
 package io.github.skshiydv.newsaggregator.user.entity;
+import io.github.skshiydv.newsaggregator.article.entity.ArticleEntity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -24,5 +26,8 @@ public class UserEntity {
     private String password;
     @NonNull
     private String username;
+    @DBRef
+    private List<ArticleEntity> articles = new ArrayList<>();
+
     private List<String> roles = new ArrayList<>();
 }
