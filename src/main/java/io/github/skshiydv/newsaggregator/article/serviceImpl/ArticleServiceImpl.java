@@ -8,6 +8,7 @@ import io.github.skshiydv.newsaggregator.article.model.CreateArticle;
 import io.github.skshiydv.newsaggregator.article.model.GetArticle;
 import io.github.skshiydv.newsaggregator.article.repository.ArticleRepository;
 import io.github.skshiydv.newsaggregator.article.service.ArticleService;
+import io.github.skshiydv.newsaggregator.article.type.ArticleType;
 import io.github.skshiydv.newsaggregator.user.entity.UserEntity;
 import io.github.skshiydv.newsaggregator.user.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -71,6 +72,20 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleEntity articleEntity = articleRepository.findById(id).orElse(null);
         assert articleEntity != null;
         return articleEntity;
+    }
+
+    @Override
+    public List<GetArticle> getArticlesByType(ArticleType type) {
+        List<ArticleEntity> articleEntities = articleRepository.findAllByType(type);
+        if (!articleEntities.isEmpty()) {
+            List<GetArticle> articles = new ArrayList<>();
+            articleEntities.forEach(articleEntity -> {
+                articles.add(ArticleEntityToGetArticle.INSTANCE.apply(articleEntity));
+            });
+            return articles;
+
+        }
+        return null;
     }
 
     @Override
