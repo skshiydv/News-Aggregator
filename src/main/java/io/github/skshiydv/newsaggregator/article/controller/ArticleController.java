@@ -5,6 +5,7 @@ import io.github.skshiydv.newsaggregator.article.entity.ArticleEntity;
 import io.github.skshiydv.newsaggregator.article.model.CreateArticle;
 import io.github.skshiydv.newsaggregator.article.model.GetArticle;
 import io.github.skshiydv.newsaggregator.article.service.ArticleService;
+import io.github.skshiydv.newsaggregator.article.type.ArticleType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,12 @@ public class ArticleController {
     @PostMapping("/add-comment/{articleId}")
     public ResponseEntity<ArticleEntity> postComment(@RequestBody Comment comment, @PathVariable String articleId) {
         return null;
+    }
+
+    @GetMapping("/{type}")
+    public ResponseEntity<List<GetArticle>> getArticleByType(@PathVariable ArticleType type) {
+        List<GetArticle> articles = articleService.getArticlesByType(type);
+        if (articles.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 }
